@@ -139,8 +139,6 @@ ClassMethod Create() As %Status
    Set Address=record.Address
    Set Zip=record.Zip
    If Zip'="",Zip'?3n1"-"4n Set Result.Error="郵便番号は, 999-9999の形式で入力" write Result.%ToJSON() Quit
-   Set Age=record.Age
-   If Age'="" Set Result.Error="登録時には、年齢の入力は、不要" write Result.%ToJSON() Quit
    Set DOB=record.DOB
    If DOB'="",DOB'?4n1"-"2n1"-"2n Set Result.Error="誕生日は、YYYY-MM-DDの形式" write Result.%ToJSON() Quit
    If DOB'="" Set DOB=$ZDATEH(DOB,3)
