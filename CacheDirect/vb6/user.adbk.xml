@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="9" zv="Cache for Windows NT (Intel) 5.0 (Build 1045U)" ts="2004-04-29 13:41:38">
+<Class name="User.ADBK">
+<Description>
+ADBK from DASL definition</Description>
+<Final>0</Final>
+<Abstract>0</Abstract>
+<ClassType>persistent</ClassType>
+<Hidden>0</Hidden>
+<NoContext>0</NoContext>
+<StorageStrategy>SQLStorage</StorageStrategy>
+<Super>%Persistent,%XML.Adaptor</Super>
+<System>0</System>
+<TimeChanged>59654,49017.222401</TimeChanged>
+<TimeCreated>59474,54060.372813</TimeCreated>
+
+<Query name="ByName">
+<Type>%SQLQuery</Type>
+<FormalSpec>Name:%String</FormalSpec>
+<SqlQuery>SELECT %ID,ANAME FROM ADBK
+ WHERE (ANAME %STARTSWITH :Name)
+ ORDER BY %ID</SqlQuery>
+<Parameter name="CONTAINID" value="1"/>
+</Query>
+
+<Parameter name="KEYS">
+<Final>0</Final>
+<Default>AID</Default>
+</Parameter>
+
+<Property name="AAGE">
+<Type>%Integer</Type>
+<Final>0</Final>
+<Calculated>1</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlComputeCode> If {ABTHDAY}="" s {AAGE}="" Quit
+ s {AAGE}=$H-{ABTHDAY}\365
+ Quit  
+</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+<Transient>0</Transient>
+</Property>
+
+<Property name="ABTHDAY">
+<Description>
+Birthday</Description>
+<Type>%Date</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+</Property>
+
+<Property name="ACITY">
+<Description>
+City Name</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlCollation>EXACT</SqlCollation>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+</Property>
+
+<Property name="ANAME">
+<Description>
+ANAME</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlCollation>EXACT</SqlCollation>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+</Property>
+
+<Property name="APHHOME">
+<Description>
+Phone No. Home</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+<Parameter name="PATTERN" value=".N1&quot;-&quot;.N1&quot;-&quot;.N"/>
+</Property>
+
+<Property name="APHOTH1">
+<Description>
+Phone No. Other</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+<Parameter name="PATTERN" value=".N1&quot;-&quot;.N1&quot;-&quot;.N"/>
+</Property>
+
+<Property name="APHWORK">
+<Description>
+Phone No. Working</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+<Parameter name="PATTERN" value=".N1&quot;-&quot;.N1&quot;-&quot;.N"/>
+</Property>
+
+<Property name="ASTATE">
+<Description>
+State </Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlCollation>EXACT</SqlCollation>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+</Property>
+
+<Property name="ASTREET">
+<Description>
+Street Name</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlCollation>EXACT</SqlCollation>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+</Property>
+
+<Property name="AZIP">
+<Description>
+Zip Code</Description>
+<Type>%String</Type>
+<Final>0</Final>
+<Calculated>0</Calculated>
+<Collection/>
+<MultiDimensional>0</MultiDimensional>
+<Private>0</Private>
+<Relationship>0</Relationship>
+<Required>0</Required>
+<SqlComputed>0</SqlComputed>
+<Transient>0</Transient>
+<Parameter name="PATTERN" value="3N1&quot;-&quot;4N"/>
+</Property>
+
+<Method name="AAGEGet">
+<Final>0</Final>
+<NotInheritable>0</NotInheritable>
+<ClassMethod>0</ClassMethod>
+<CodeMode>code</CodeMode>
+<FormalSpec/>
+<NotForProperty>0</NotForProperty>
+<Private>0</Private>
+<ReturnType>%Integer</ReturnType>
+<Implementation><![CDATA[
+ If ..ABTHDAY="" Quit ""
+ Quit $H-..ABTHDAY\365
+]]></Implementation>
+</Method>
+
+<Storage name="SQLStorage">
+<Type>%CacheSQLStorage</Type>
+<SqlIdExpression>$$next("^ADBK(""COUNT"")")</SqlIdExpression>
+<SqlRowIdName>AID</SqlRowIdName>
+<SqlTableNumber>1</SqlTableNumber>
+<StreamLocation>^User.ADBKS</StreamLocation>
+<SQLMap name="IndexMap">
+<Type>index</Type>
+<Global>^ADBK</Global>
+<Structure>delimited</Structure>
+<Subscript name="1">
+<AccessType>sub</AccessType>
+<Expression>"XNAME"</Expression>
+</Subscript>
+<Subscript name="2">
+<AccessType>sub</AccessType>
+<Expression>$P({ANAME},"　",1)</Expression>
+</Subscript>
+<Subscript name="3">
+<AccessType>sub</AccessType>
+<Expression>$P({ANAME},"　",2)</Expression>
+</Subscript>
+<Subscript name="4">
+<AccessType>sub</AccessType>
+<Expression>{AID}</Expression>
+</Subscript>
+<RowIdSpec name="1">
+<Expression>{L4}</Expression>
+<Field>AID</Field>
+</RowIdSpec>
+</SQLMap>
+<SQLMap name="MasterMap">
+<Type>data</Type>
+<Global>^ADBK</Global>
+<Structure>delimited</Structure>
+<Subscript name="1">
+<AccessType>sub</AccessType>
+<Expression>"DATA"</Expression>
+</Subscript>
+<Subscript name="2">
+<AccessType>sub</AccessType>
+<Expression>{AID}</Expression>
+</Subscript>
+<RowIdSpec name="1">
+<Expression>{L2}</Expression>
+<Field>AID</Field>
+</RowIdSpec>
+<Data name="ABTHDAY">
+<Delimiter>";"</Delimiter>
+<Node>"DEMO"</Node>
+<Piece>6</Piece>
+</Data>
+<Data name="ACITY">
+<Delimiter>";"</Delimiter>
+<Node>"DATA"</Node>
+<Piece>3</Piece>
+</Data>
+<Data name="ANAME">
+<Delimiter>";"</Delimiter>
+<Node>"DEMO"</Node>
+<Piece>1</Piece>
+</Data>
+<Data name="APHHOME">
+<Delimiter>";"</Delimiter>
+<Node>"PHONE"</Node>
+<Piece>1</Piece>
+</Data>
+<Data name="APHOTH1">
+<Delimiter>";"</Delimiter>
+<Node>"PHONE"</Node>
+<Piece>3</Piece>
+</Data>
+<Data name="APHWORK">
+<Delimiter>";"</Delimiter>
+<Node>"PHONE"</Node>
+<Piece>2</Piece>
+</Data>
+<Data name="ASTATE">
+<Delimiter>";"</Delimiter>
+<Node>"DEMO"</Node>
+<Piece>3</Piece>
+</Data>
+<Data name="ASTREET">
+<Delimiter>";"</Delimiter>
+<Node>"DEMO"</Node>
+<Piece>2</Piece>
+</Data>
+<Data name="AZIP">
+<Delimiter>";"</Delimiter>
+<Node>"DEMO"</Node>
+<Piece>5</Piece>
+</Data>
+</SQLMap>
+</Storage>
+</Class>
+<Checksum value="2172619454"/>
+</Export>
