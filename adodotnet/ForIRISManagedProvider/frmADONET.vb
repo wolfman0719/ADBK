@@ -268,7 +268,12 @@ Public Class frmADONET
         Try
             'cnCache = New OdbcConnection("DSN=CacheISJSAMPLES")
             'cnCache = New OdbcConnection("DSN=IRIS User")
-            cnCache = New IRISConnection("Server = localhost; Port=51773; Namespace=USER; Password = SYS; User ID = _system;")
+            Dim consetup As New setup()
+            consetup.LoadSetupFile("..\connectioninfo.json")
+            Dim connstring As String = ""
+            connstring = "Server = " + consetup.co.hostname + "; Port=" + consetup.co.port.ToString() + "; Namespace=" + consetup.co.irisnamespace + "; Password = " + consetup.co.password + "; User ID = " + consetup.co.username + ";"
+
+            cnCache = New IRISConnection(connstring)
 
             cnCache.Open()
 
