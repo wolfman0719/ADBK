@@ -107,7 +107,11 @@ actionSaveError:
 	Private Sub ADBKMain_Load(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Load
 		'Dim sdir As String
 		'm_factory = CreateObject("CacheObject.Factory")
-		iris_conn.ConnectionString = "Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;"
+		Dim consetup As New setup()
+		consetup.LoadSetupFile("..\connectioninfo.json")
+		iris_conn.ConnectionString = "Server = " + consetup.co.hostname + "; Port=" + consetup.co.port.ToString() + "; Namespace=" + consetup.co.irisnamespace + "; Password = " + consetup.co.password + "; User ID = " + consetup.co.username + ";"
+
+		'iris_conn.ConnectionString = "Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;"
 		iris_conn.Open()
 		iris = IRIS.CreateIRIS(iris_conn)
 
