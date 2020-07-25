@@ -1,12 +1,15 @@
 Option Strict Off
 Option Explicit On
 '以下のインポートが必要
+Imports System.Data.Common
 Imports cdapp
 
 Friend Class ADBKMain
 	Inherits System.Windows.Forms.Form
 	'Dim CacheDirect As New cVMClass
-	Public WithEvents CacheDirect As cacheDirectWapper = New cacheDirectWapper("Server = localhost; Port=51773; Namespace=USER; Password = SYS; User ID = _system;")
+	Dim connstring As String = ""
+	'Public WithEvents CacheDirect As cacheDirectWapper = New cacheDirectWapper("Server = localhost; Port=51773; Namespace=USER; Password = SYS; User ID = _system;")
+	Public WithEvents CacheDirect As cacheDirectWapper
 
 	Private Sub CmdDelete_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles CmdDelete.Click
 		Dim status As Short
@@ -25,12 +28,12 @@ Friend Class ADBKMain
 		'検索結果をクリアする
 		CType(FindByName.Controls("ListLookupName"), Object).Items.Clear()
 	End Sub
-	
+
 	Private Sub CmdEnd_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles CmdEnd.Click
 		Me.Close()
 		End
 	End Sub
-	
+
 	Private Sub CmdFind_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles CmdFind.Click
 		CType(FindByName.Controls("ListLookupName"), Object).Items.Clear()
 		'検索フォームを表示する
@@ -38,7 +41,7 @@ Friend Class ADBKMain
 		'新規入力時以外は、名前フィールドは変更不可とする。
 		TxtNAME.ReadOnly = True
 	End Sub
-	
+
 	Private Sub CmdNew_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles CmdNew.Click
 		'名前フィールドを変更可能に戻す
 		TxtNAME.ReadOnly = False
@@ -53,7 +56,7 @@ Friend Class ADBKMain
 		'新規データの初期化を行う
 		CacheDirect.Execute("$$New^ADBK()")
 	End Sub
-	
+
 	Private Sub CmdUpdate_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles CmdUpdate.Click
 		Dim status As Object
 
@@ -70,6 +73,11 @@ Friend Class ADBKMain
 
 	Private Sub ADBKMain_Load(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs) Handles MyBase.Load
 
+		Dim consetup As New setup()
+		consetup.LoadSetupFile("..\connectioninfo.json")
+		Dim connstring As String = ""
+		connstring = "Server = " + consetup.co.hostname + "; Port=" + consetup.co.port.ToString() + "; Namespace=" + consetup.co.irisnamespace + "; Password = " + consetup.co.password + "; User ID = " + consetup.co.username + ";"
+		CacheDirect = New cacheDirectWapper(connstring)
 		'CacheDirect.VisM = VisM1.GetOcx
 
 		'If Not Install("Address Book Demo Application", VisM1, "GLO", "^ADBK", "USER", "+'$D(^$ROUTINE(""ADBK""))", "adbk.gsa", "MAC", "ADBK", "USER", "+'$D(^$ROUTINE(""ADBK""))", "adbk.rsa") Then End
