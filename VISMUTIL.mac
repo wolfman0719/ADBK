@@ -12,14 +12,19 @@ GetList(Gname,Node,Matchkey,Delim) [PLIST, i, Node2, Matched] PUBLIC {
  //        Error --- 1 OK
  //              --- 0 Error Description
  Kill PLIST
- If Node'="" Set Node=$Extract(Node,1,$Length(Node)-1)_$Char($Ascii($Extract(Node,$Length(Node)))-1)
+
+ If (Node = $char(0)) {
+	 set Node = ""
+	 set Matchkey = ""
+ }
+ If Node'="" Set Node=$Order(@Gname@(Node),-1)
  set j = 0
  Set Matched=0
  If '$Data(Delim) Set Delim=$Char(2)
  For i=1:1 { 
    Set Node=$Order(@Gname@(Node))
    If Node="" Quit
-   If (Matchkey'= "" && Node'[Matchkey) Set Matched=1,Node="" Quit
+   If ((Matchkey'= "") && (Node'[Matchkey)) Set Matched=1,Node="" Quit
    Set Node2=""
    For {
 	 Set Node2=$Order(@Gname@(Node,Node2))
