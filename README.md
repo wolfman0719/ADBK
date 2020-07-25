@@ -132,21 +132,18 @@ IRISの実行環境に合わせてファイルの内容を変更
 
 build/adbk
 
-ADBK.mac
-
-adbkglb.xml
-
-VISMUTIL.mac
+- ADBK.mac
+- adbkglb.xml
+- VISMUTIL.mac
 
 build/adbk/ADBK
 
-Broker.cls
-
-JSON.cls
+- Broker.cls
+- JSON.cls
 
 build/adbk/User
 
-ADBK.cls
+- ADBK.cls
 
 ### CacheDirect Emulator
 
