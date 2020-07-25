@@ -30,7 +30,7 @@ VB6でADO.Netを使用したサンプルをIRISのADO.Netで書き直したサ�
 
 ADO.Net for IRISバージョン
 
-#### Project1.Net
+#### Project1.NET
 
 VB6のプロジェクトをVisual Studio 2008で変換したプロジェクト
 
@@ -78,7 +78,7 @@ CacheListを使用したサンプルをIRIS用に書き換えたサンプル
 
 ADO.Netを使用してIRIS用に書き換えたサンプル
 
-### Project.NET
+#### Project.NET
 
 VB6のプロジェクトをVisual Studio 2008でVB.NETに変換したプロジェクト
 
@@ -133,12 +133,15 @@ IRISの実行環境に合わせてファイルの内容を変更
 build/adbk
 
 ADBK.mac
+
 adbkglb.xml
+
 VISMUTIL.mac
 
 build/adbk/ADBK
 
 Broker.cls
+
 JSON.cls
 
 build/adbk/User
@@ -149,7 +152,7 @@ ADBK.cls
 
 CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
 
-[github.com/wolfman0719/CacheDirectEmulator.git](https://github.com/wolfman0719/CacheDirectEmulator.git
+[CacheDirect EmulatorのGithub](https://github.com/wolfman0719/CacheDirectEmulator.git)
 
 
 ### REST設定
