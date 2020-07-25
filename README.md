@@ -1,114 +1,167 @@
-# Shop DEMO
+# ADBK DEMO
 
-ShopデモアプリケーションのDocker Build
+ADBK(アドレス帳).Netデモアプリケーション　for IRIS
+
+IRISで用意された様々な.Net APIを使用したサンプル
+
+## ディレクトリ構造
+
+### ActiveX
+
+VB6でCacheObject.dll を利用したサンプルをIRISの.Net Native APIで書き直したサンプル
+
+#### forIRIS
+
+.Net Native APIバージョン
+
+#### Project1.Net
+
+VB6のプロジェクトをVisual Studio 2008で変換したプロジェクト
+
+#### VB6
+
+VB6でCacheObject.dllを利用したサンプル
+
+### ADO
+
+VB6でADO.Netを使用したサンプルをIRISのADO.Netで書き直したサンプル
+
+#### forIRIS
+
+ADO.Net for IRISバージョン
+
+#### Project1.Net
+
+VB6のプロジェクトをVisual Studio 2008で変換したプロジェクト
+
+#### VB6
+
+VB6でADO.Netを使用したサンプル
+
+### adodotnet
+
+ADO.netを使用したVB.netサンプル
+
+#### for Cache
+
+Cache用プロジェクト(ODBC)
+
+#### forIRISODBC
+
+IRIS用プロジェクト(ODBC)
+
+#### forIRISManagedProvider
+
+IRIS用プロジェクト（IRIS ADO.Net）
+
+### CacheDirect
+
+VB6のCache Direct（VisM.OCX）を使用したサンプルを.Net Native APIを使用したCacheDirectEmulatorで書き換えたサンプル
+
+#### forIRIS
+
+IRIS用にCacheDirect Emulatorを使用して書き換えたバージョン
+
+#### Project1.NET
+
+VB6のプロジェクトをVisual Studio 2008でVB.NETに変換したプロジェクト
+
+#### VB6
+
+VisM.OCXを使用したサンプル
+
+### CacheList
+
+CacheListを使用したサンプルをIRIS用に書き換えたサンプル
+
+#### forIRIS
+
+ADO.Netを使用してIRIS用に書き換えたサンプル
+
+### Project.NET
+
+VB6のプロジェクトをVisual Studio 2008でVB.NETに変換したプロジェクト
+
+#### Vb6
+
+CacheList.OCXを使用したサンプル
+
+### dotnet
+
+C#のサンプル
+
+MVCモデルを使用したサンプル
+
+#### forCache
+
+Cache用サンプル
+
+#### forIRIS
+
+##### MVC-adonet
+
+ADO.NETを使用したサンプル
+
+##### MVC-direct
+
+.Net Native APIを使用したサンプル
+
+##### MVC-objbind
+
+.Net Native APIを使用したサンプル
+
+##### MVC-REST
+
+REST/JSONを使用したサンプル
+
+## 事前準備
+
+### connectioninfo.json
+
+各サンプルの実行イメージ（通常はbinの下）の1つ上の階層にconnectioninfo.jsonを置く
+
+ファイルの形式は、
+
+{"username":"_system","password":"SYS","port":51773,"irisnamespace":"USER","hostname":"localhost"}
+
+IRISの実行環境に合わせてファイルの内容を変更
+
+### IRISルーチン、グローバル、クラスのロード
+
+サンプルを動かすネームスペース（デフォルトUser）に必要なルーチン、グローバル、クラスをロードする
+
+build/adbk
+
+ADBK.mac
+adbkglb.xml
+VISMUTIL.mac
+
+build/adbk/ADBK
+
+Broker.cls
+JSON.cls
+
+build/adbk/User
+
+ADBK.cls
+
+### CacheDirect Emulator
+
+CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
+
+[github.com/wolfman0719/CacheDirectEmulator.git](https://github.com/wolfman0719/CacheDirectEmulator.git
 
 
-## ビルドプロセス
+### REST設定
 
-### Build
-* ```./build.sh```    for Linux, MacOS
-* ```build.sh```      for Windows 
-### Run
-* ```./run.sh```      for Linux, MacOS
-* ```run.sh```        for Windows
+管理ポータル>システム管理>セキュリティ>アプリケーション>ウェブ・アプリケーション
 
--bash: ./build.sh: Permission deniedとエラーになる場合は、
+新しいウェブ・アプリケーションを作成
 
-```chmod 777 *.sh```
+名前:  /adbk
+ネームスペース: User（デフォルト）
+有効　REST
+ディスパッチ・クラス: ADBK.Broker
 
-## 起動方法
+保存ボタンを押す
 
-### デモアプリケーション
-
-[localhost:52778/csp/user/Order/Shop/login.htm](http://localhost:52778/csp/user/Order/Shop/login.htm)
-
-### 管理ポータル
-
-[localhost:52778/csp/sys/%25CSP.Portal.Home.zen?IRISUsername=_system&IRISPassword=demosystem](http://localhost:52778/csp/sys/%25CSP.Portal.Home.zen?IRISUsername=_system&IRISPassword=demosystem)
-
-### Webターミナル
-
-[localhost:52778/terminal/?IRISUsername=_system&IRISPassword=demosystem](http://localhost:52778/terminal/?IRISUsername=_system&IRISPassword=demosystem)
-
-### RESTインターフェース
-
-#### GETサンプル
-
-http://localhost:52778/shop/products?IRISUsername=_system&IRISPassword=demosystem
-
-content-type application/json; charset=utf-8
-
-#### POSTサンプル
-
-http://localhost:52778/shop/addorder?IRISUserName=_system&IRISPassword=demosystem
-
-{"ShipTo":{"City":"Tokyo","Street":"Ginza","PostalCode":"1600001"},"CustomerId":1,"Items":[{"ProductId":"MNT001","Amount":1},{"ProductId":"PC001","Amount":1}]}
-
-#### クレデンシャル情報
-
-##### デモアプリケーション
-
-| 項目   | 値    |
-|-------|-------|
-利用者ID | taro |
-パスワード| taro |
-
-##### その他
-
-| 項目           | 値        |
-|---------------|------------
-| システムログイン |　_system  |
-|パスワード　	   |demosystem|
-
-### SQLサンプル
-
-* `select * from shop.porder`
-* `select * from shop.orderitem`
-
-### インターオペラビリティデモ
-
-#### プロダクション開始
-
-管理ポータルでInteroperabilityを選択
-構成>プロダクション
-Shop.Productionを開いて、開始ボタンを押してプロダクションを開始する
-
-#### 注文ファイルのコピー
-
-```docker ps
-docker exec -ti shopdemo /bin/bash
-
-cp /intersystems/iris/shop/samples/* /intersystems/iris/shop/message/in
-```
-
-#### 結果確認
-
-* `select * from shop.porder`
-* `select * from shop.orderitem`
-
-### NLPデモ
-
-#### ドメイン設定
-
-管理ポータル>Analytics>Text Analytics>ドメインアーキテクト
-
-##### 新規作成
-
-ドメイン設定
-
-|項目名    |値                |
-|---------|------------------|
-|ドメイン名 |news             |
-|クラス名   |news.nhk         |
-|言語　     |Japaneseのみ選択  |
-
- データ位置
-
-|項目名      |値                 |
-------------|-------------------
-|名前：	     |RSS_1              |
-|バッチモード　|yes               |
-|サーバー名	   |www3.nhk.or.jp    |
-|url		  |/rss/news/cat0.xml|
-
-#### 保存、コンパイル、構築
