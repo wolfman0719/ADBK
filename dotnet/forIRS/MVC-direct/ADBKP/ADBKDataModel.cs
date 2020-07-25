@@ -34,8 +34,11 @@ namespace ADBKP
         public void init()
         {
             adbksrc = new ADBKDatasource();
+            configconn consetup = new configconn();
             //adbksrc.connect("localhost", "1972", "_system", "SYS", "user");
-            adbksrc.connect("localhost", "51773", "_system", "SYS", "user");
+            consetup.LoadSetupFile("..\\connectioninfo.json");
+            adbksrc.connect(consetup.co.hostname, consetup.co.port.ToString(), consetup.co.username, consetup.co.password, consetup.co.irisnamespace);
+
             iris = IRIS.CreateIRIS(adbksrc.conn);
         }
 
