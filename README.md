@@ -1,6 +1,6 @@
 # ADBK DEMO
 
-ADBK(アドレス帳).Netデモアプリケーション　for IRIS
+ADBK(アドレス帳).Netデモアプリケーション for IRIS
 
 IRISで用意された様々な.Net APIを使用したサンプル
 
@@ -122,7 +122,7 @@ REST/JSONを使用したサンプル
 
 ファイルの形式は、
 
-{"username":"_system","password":"SYS","port":51773,"irisnamespace":"USER","hostname":"localhost"}
+'{"username":"_system","password":"SYS","port":51773,"irisnamespace":"USER","hostname":"localhost"}'
 
 IRISの実行環境に合わせてファイルの内容を変更
 
@@ -158,10 +158,10 @@ CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
 
 新しいウェブ・アプリケーションを作成
 
-名前:  /adbk
-ネームスペース: User（デフォルト）
-有効　REST
-ディスパッチ・クラス: ADBK.Broker
+- 名前:  /adbk
+- ネームスペース: User（デフォルト）
+- 有効　REST
+- ディスパッチ・クラス: ADBK.Broker
 
 保存ボタンを押す
 
