@@ -122,7 +122,7 @@ REST/JSONを使用したサンプル
 
 ファイルの形式は、
 
-'{"username":"_system","password":"SYS","port":51773,"irisnamespace":"USER","hostname":"localhost"}'
+ `{"username":"_system","password":"SYS","port":51773,"irisnamespace":"USER","hostname":"localhost"} `
 
 IRISの実行環境に合わせてファイルの内容を変更
 
