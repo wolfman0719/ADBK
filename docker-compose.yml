@@ -10,7 +10,7 @@ services:
     container_name: adbkdemo
     init: true
     hostname: myiris
-    
+    command: --check-caps false
     ports:
     # superserver default port 
     - "51782:51773"
