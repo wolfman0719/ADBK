@@ -10,6 +10,8 @@ Windows フォームアプリケーション(.NET Framework)
 
 Windows Form（WinForms）ユーザーインタフェースを含むアプリケーションを作成するためのプロジェクトです。
 
+VB.NET
+
 プロジェクト名およびソリューション名
 
 - ADBKADO
