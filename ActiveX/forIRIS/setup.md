@@ -9,6 +9,7 @@ Visual Studioを起動し、ファイル>新規作成>プロジェクトをク�
 Windows フォームアプリケーション(.NET Framework)
 
 Windows Form（WinForms）ユーザーインタフェースを含むアプリケーションを作成するためのプロジェクトです。
+VB.NET
 
 プロジェクト名およびソリューション名
 
@@ -39,7 +40,7 @@ Windows Form（WinForms）ユーザーインタフェースを含むアプリケ
 
 #### プロジェクト設定変更
 
-プロジェクト>ADBKCacheDirectのプロパティ
+プロジェクト>ADBKNativeAPIのプロパティ
 
 アプリケーションパネル
 
