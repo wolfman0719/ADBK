@@ -165,3 +165,7 @@ CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
 
 保存ボタンを押す
 
+### Visula Studioプロジェクト作成方法
+
+CacheDirectの所のsetup.mdを参考にして設定
+（参照設定等がプリジェクト毎に異なる）
