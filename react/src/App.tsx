@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import './components/Adbk.tsx';
+import { Adbk } from './components/Adbk';
 
 function App() {
   return (
