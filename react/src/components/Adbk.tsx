@@ -1,29 +1,31 @@
-import {FormEventHandler }  from 'react';
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
 
 import configinfo from '../serverconfig.json';
 
-const ServerAddress = configinfo.ServerAddress;
-const ServerPort = configinfo.ServerPort;
-const Username = configinfo.Username;
-const Password = configinfo.Password;
+const serverAddress = configinfo.ServerAddress;
+const serverPort = configinfo.ServerPort;
+const username = configinfo.Username;
+const password = configinfo.Password;
 
 export const Adbk = (props: any) => {
 
-  const [inputtext, setInputText] = useState<any>("");
+  const [inputtext, setInputText] = useState("");
   const [nameList, setNameList] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [name, setName] = useState<any>("");
-  const [aid, setAid] = useState<any>("");
+  const [aid, setAid] = useState<number>(0);
   const [zipcode, setZipcode] = useState<any>("");
   const [address, setAddress] = useState<any>("");
   const [telh, setTelh] = useState<any>("");
   const [telw, setTelw] = useState<any>("");
   const [age, setAge] = useState<any>("");
   const [dob, setDob] = useState<any>("");
+  const [visible, setVisible] = useState<any>("none");
+  let listLength = 0;
+  let firstitemid: any = 0;
 
   const onChangeZipcode = (e: ChangeEvent<HTMLInputElement>) => setZipcode(e.target.value);  
   const onChangeAddress = (e: ChangeEvent<HTMLInputElement>) => setAddress(e.target.value);  
@@ -31,65 +33,83 @@ export const Adbk = (props: any) => {
   const onChangeTelw = (e: ChangeEvent<HTMLInputElement>) => setTelw(e.target.value);  
   const onChangeDob = (e: ChangeEvent<HTMLInputElement>) => setDob(e.target.value);  
 
-  const onChangeText = (e: ChangeEvent<HTMLInputElement>) => {
-  	setInputText(e.target.value);
+  const onChangeText = (e: ChangeEvent<HTMLInputElement>) => setInputText(e.target.value);
+
+  const queryByName = (e: any) => {
 	setIsLoading(true);
     setIsError(false);
     
-    let name = e.target.value;
+    const tname = inputtext;
     
-	axios
-	  .get<any>(`http://${ServerAddress}:${ServerPort}/api/adbk/listbyname/${name}?IRISUsername=${Username}&IRISPassword=${Password}`)
-	  .then((result: any) => {
-	  	console.log('result = ' + result.data.length);
-	  	const names = result.data.map((idname: any) => ({
-		id: idname.split(" ")[0],
-		name: idname.split(" ")[1]
-      }));
-      setNameList(names);
-	  })
-      .catch((error: any) => {
-        setIsError(true)
-		 if (error.response) {			
-		   setErrorText(error.response.data.summary);
-		 }
-		 else if (error.request) {
-		   setErrorText(error.request);
-		 } 
-		 else {
-		   setErrorText(error.message);
-		 }
-	  })
-      .finally(() => setIsLoading(false));
-
-     setName("");
-     setZipcode("");
-     setAddress("");
-     setTelh("");
-     setTelw("");
-     setAge("");
-     setDob("");
-     setAid(1000);
+    if (tname === null || tname === "")
+    {
+      clearADBK();
+ 	  setVisible("none");
+    }
+    else {
+	  axios
+	    .get<any>(`http://${serverAddress}:${serverPort}/api/adbk/listbyname/${tname}?IRISUsername=${username}&IRISPassword=${password}`)
+	    .then((result: any) => {
+	  	  const names = result.data.map((idname: any) => ({
+		  id: idname.split(" ")[0],
+		  name: idname.split(" ")[1]
+        }));
+        setNameList(names);
+        listLength = names.length;
+        if (names.length > 0) {
+      	  firstitemid = names[0].id;
+        }
+	    })
+        .catch((error: any) => {
+          setIsError(true)
+		   if (error.response) {			
+		     setErrorText(error.response.data.summary);
+		   }
+		   else if (error.request) {
+		     setErrorText(error.request);
+		   } 
+		   else {
+		     setErrorText(error.message);
+		   }
+	    })
+        .finally(() => {
+      	  setIsLoading(false)
+          if (listLength > 0) {    
+        	
+ 	        getADBKById(firstitemid);
+ 	        setVisible("");
+          }
+         else {
+           clearADBK();
+ 	       setVisible("none");
+         }
+        });
+     } 
   }
 
    const onClickItem = (e: any) => {
-	setIsLoading(true);
-	setIsError(false);
 	
-	let id = e.target.value;
+	const id = e.target.value;
+	
+	getADBKById(id);
 
-	axios
-	  .get<any>(`http://${ServerAddress}:${ServerPort}/api/adbk/getdatabyid/${id}?IRISUsername=${Username}&IRISPassword=${Password}`)
+  };
+
+   const getADBKById = (id: any) => {
+	
+    axios
+	  .get<any>(`http://${serverAddress}:${serverPort}/api/adbk/getdatabyid/${id}?IRISUsername=${username}&IRISPassword=${password}`)
 	  .then((result: any) => {
-		setName(result.data.Name);
-		setZipcode(result.data.Zip);
-		setAddress(result.data.Address);
-		setTelh(result.data.Telh);
-		setTelw(result.data.Telw);
-		setAge(result.data.Age);
-		setDob(result.data.Dob);
-		setAid(result.data.Id);
-	  })
+        setName(result.data.Name);
+        setInputText(result.data.Name);
+        setZipcode(result.data.Zip);
+        setAddress(result.data.Address);
+        setTelh(result.data.Telh);
+        setTelw(result.data.Telw);
+        setAge(result.data.Age);
+        setDob(result.data.Dob);
+        setAid(result.data.Id);
+	   })
       .catch((error: any) => {
 	     setIsError(true)
 		 if (error.response) {			
@@ -102,11 +122,16 @@ export const Adbk = (props: any) => {
 		   setErrorText(error.message);
 		 }
 	  })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false))    
+    
   };
 
    const newAdbk = (e: any) => {
-
+    clearADBK(); 
+    setInputText("");
+  };
+  
+   const clearADBK = () => {
      setName("");
      setZipcode("");
      setAddress("");
@@ -114,8 +139,9 @@ export const Adbk = (props: any) => {
      setTelw("");
      setAge("");
      setDob("");
-     setAid("");
-     
+     setAid(0);
+     setNameList([]);
+ 	 setVisible("none");
   };
     
    const deleteAdbk = (e: any) => {
@@ -126,7 +152,7 @@ export const Adbk = (props: any) => {
 	let id = aid;
 
 	axios
-	  .delete<any>(`http://${ServerAddress}:${ServerPort}/api/adbk/delete/${id}?IRISUsername=${Username}&IRISPassword=${Password}`)
+	  .delete<any>(`http://${serverAddress}:${serverPort}/api/adbk/delete/${id}?IRISUsername=${username}&IRISPassword=${password}`)
       .catch((error: any) => {
 	     setIsError(true)
 		 if (error.response) {			
@@ -140,6 +166,9 @@ export const Adbk = (props: any) => {
 		 }
 	  })
       .finally(() => setIsLoading(false))
+
+    clearADBK(); 
+    setInputText("");    
      
   };
     
@@ -148,16 +177,17 @@ export const Adbk = (props: any) => {
 	setIsLoading(true);
 	setIsError(false);
 	
-	if (aid === "")  {
-	  const senddata: any =  "";
-	  senddata.zip = zipcode;
-	  senddata.address = address;
-	  senddata.telh = telh;
-	  senddata.telw = telw;
-	  senddata.name = name;
-	  
+	if (aid === 0)  {
+	  const senddata: any =  {};
+	  senddata.Zip = zipcode;
+	  senddata.Address = address;
+	  senddata.Telh = telh;
+	  senddata.Telw = telw;
+	  senddata.Name = inputtext;
+	  senddata.DOB = dob;
+
 	  axios
-	    .post<any>(`http://${ServerAddress}:${ServerPort}/api/adbk/create/?IRISUsername=${Username}&IRISPassword=${Password}`,senddata)
+	    .post<any>(`http://${serverAddress}:${serverPort}/api/adbk/create?IRISUsername=${username}&IRISPassword=${password}`,senddata)
 	   .then((result: any) => {
 		  if (result.data.Error === "ok") {
 		  	setIsError(false);
@@ -183,25 +213,27 @@ export const Adbk = (props: any) => {
         .finally(() => setIsLoading(false))
 	}
 	else {
-	  const senddata: any =  "";
-	  senddata.id = aid;
-	  senddata.zip = zipcode;
-	  senddata.address = address;
-	  senddata.telh = telh;
-	  senddata.telw = telw;
-	  senddata.name = name;
+	  const senddata: any =  {};
+	  senddata.Id = aid;
+	  senddata.Zip = zipcode;
+	  senddata.Address = address;
+	  senddata.Telh = telh;
+	  senddata.Telw = telw;
+	  senddata.Name = name;
+	  senddata.DOB = dob;
 	  
 	  axios
-	    .put<any>(`http://${ServerAddress}:${ServerPort}/api/adbk/modify?IRISUsername=${Username}&IRISPassword=${Password}`,senddata)
+	    .put<any>(`http://${serverAddress}:${serverPort}/api/adbk/modify?IRISUsername=${username}&IRISPassword=${password}`,senddata)
 	   .then((result: any) => {
+	   	  // console.log("result = " + JSON.stringify(result, null, 2));
 		  if (result.data.Error === "ok") {
 		  	setIsError(false);
+		    setAid(result.data.Id);
 		  }
 		  else {
 		  	setIsError(true);
 		    setErrorText(result.data.Error);
 		  }
-		  setAid(result.data.id);
 	    })
         .catch((error: any) => {
 	       setIsError(true)
@@ -217,69 +249,62 @@ export const Adbk = (props: any) => {
 	    })
         .finally(() => setIsLoading(false))
 	}
-
-     
-  };
+};
 
   return (
     <>
       <form>
-      <div className="container">
-      <div className="row">
-      <div className="col-2" />
-      <div className="col-1 align-items-start"><label className="h3">住所録</label></div>
-      </div>
-      <div className="row">
-	  <div className="col-2  align-items-start"><label className="p-2">名前検索キーワード: </label></div>
-	  <div className="col-1  align-items-start"><input type="text" value = {inputtext} onChange={onChangeText} /></div>
-	  </div>
-	  	  {isLoading ? (<div className="row"></div>)
-		 : (
-         <div className="row">
-	     <div className="col-2 align-items-start"><label className="p-2">名前候補: </label></div>
-		 <div className="col-1 align-items-start"><select size={5} name="namelist" id="namelist" onChange={onClickItem} style = {{float: "left",width: "150px"}} value={aid}>
-		 {nameList.map((name: any) => (
-        <option value={name.id}>{name.name} </option>
-		 ))}</select></div></div>)
+      <table>
+      <tbody>
+      <tr><td /><td><label className="h3">住所録</label></td><td /></tr>
+	  <tr>
+	  <td><label className="p-2">名前: </label></td>
+	  <td><input type="text" value = {inputtext} onChange={onChangeText} style = {{float: "left"}}></input><button type="button" value="new" onClick={queryByName}  style = {{float: "left"}} >検索</button></td><td><label>*(アスタリスク)入力で全件検索</label></td>
+	  </tr>
+	 <tr>
+	  <td /><td><select size={3} name="namelist" value={aid} onClick={onClickItem} style = {{float: "left", width: "180px",display: visible}}>
+	  {isLoading ? (<option value="loading" key="loading"></option>)
+	  : (nameList.map((name: any) => (
+        <option value={name.id} key={name.id}>{name.name} </option>
+       )))
 	  }
-     <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">名前:  {name}</label></div>
-	 </div>
-     <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">郵便番号: </label></div>
-	  <div className="col-1 align-items-start"><input type="text"  name="zipcode" value={zipcode}  onChange={onChangeZipcode}  style = {{float: "left"}} /></div>
-	  </div>
-	  <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">住所: </label></div>
-	  <div className="col-1 align-items-start"><input type="text"  name="address" value={address} onChange={onChangeAddress}  style = {{float: "left", width: "300px"}} /></div>
-	  </div>
-	 <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">自宅Tel: </label></div>
-	  <div className="col-1 align-items-start"><input type="text"   name="telh" value={telh} onChange={onChangeTelh} style = {{float: "left"}} /></div>
-	  </div>
-	  <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">会社Tel: </label></div>
-	  <div className="col-1 align-items-start"><input type="text"   name="telw" value={telw} onChange={onChangeTelw} style = {{float: "left"}} /></div>
-	  </div>
-	  <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">年齢: </label></div>
-	  <div className="col-1 align-items-start"><input type="text"   name="age" value={age} style = {{float: "left"}} /></div>
-	  </div>
-	  <div className="row">
-	  <div className="col-2 align-items-start"><label className="p-2">生年月日: </label></div>
-	  <div className="col-2 align-items-start"><input type="text"   name="dob" value={dob} onChange={onChangeDob}  /></div>
-	  <div className="col-2 align-items-start"><label>YYYY-MM-DD</label></div>
-	  </div>
-	  <input type="hidden" id="id" name="id" value={aid} />
-	  <div className="row">
-	  <div className="col-2" />
-	  <div className="col-2 align-items-start"><button type="submit" value="new" onClick={newAdbk}>新規</button>
-	  <button type="submit" value="delete" onClick={deleteAdbk}>削除</button>
-	  <button type="submit" value="save" onClick={saveAdbk}>登録／変更</button>
-	  </div>
-	  </div>
-	  </div>
+     </select></td><td /></tr>
+     <tr>
+	 <td><label className="p-2">郵便番号: </label></td>
+	 <td><input type="text"  name="zipcode" value={zipcode}  onChange={onChangeZipcode} style = {{float: "left"}} /></td><td />
+	  </tr>
+	  <tr>
+	  <td><label className="p-2">住所: </label></td>
+	  <td><input type="text"  name="address" value={address} onChange={onChangeAddress}  style = {{float: "left", width: "250px"}} /></td><td />
+	  </tr>
+	 <tr>
+	  <td><label className="p-2">自宅Tel: </label></td>
+	  <td><input type="text"   name="telh" value={telh} onChange={onChangeTelh} style = {{float: "left"}} /></td><td />
+	  </tr>
+	  <tr>
+	  <td><label className="p-2">会社Tel: </label></td>
+	  <td><input type="text"   name="telw" value={telw} onChange={onChangeTelw} style = {{float: "left"}} /></td><td />
+	  </tr>
+	  <tr>
+	  <td><label className="p-2">年齢: </label></td>
+	  <td><input type="text"   name="age" value={age} style = {{float: "left"}} /></td><td />
+	  </tr>
+	  <tr>
+	  <td><label className="p-2">生年月日: </label></td>
+	  <td><input type="text"   name="dob" value={dob} onChange={onChangeDob} />
+	  <label>YYYY-MM-DD</label></td><td />
+	 <td> <input type="hidden" id="id" name="id" value={aid} /></td>
+	  </tr>
+	  <tr>
+	  <td />
+	  <td><button type="button" value="new" onClick={newAdbk}  style = {{float: "left"}} >新規</button>
+	  <button type="button" value="delete" onClick={deleteAdbk}  style = {{float: "left"}} >削除</button>
+	  <button type="button" value="save" onClick={saveAdbk}  style = {{float: "left"}} >登録／変更</button>
+	  </td><td />
+	  </tr>
+	 </tbody></table>
       </form>
+	  {isError && <p style={{ color: "red" }}>エラーが発生しました　{`${errorText}`}</p>}
     </>	
   );	
 }
