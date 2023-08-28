@@ -5,7 +5,7 @@ ClassMethod ListByName(name As %String) As %Status
 {
 	if $data(%request) {
         set %response.ContentType="application/json"
-	    set %response.CharSet = "utf-8"
+	      set %response.CharSet = "utf-8"
 	 }
 
 	set status = $$$OK
@@ -40,7 +40,7 @@ ClassMethod GetData(Name As %String) As %Status
  try {
       if $data(%request) {
         set %response.ContentType="application/json"
-	    set %response.CharSet = "utf-8"
+	      set %response.CharSet = "utf-8"
 	  }
 
       set personobject = {}
@@ -55,7 +55,7 @@ ClassMethod GetData(Name As %String) As %Status
       Set personobject.Name=$Piece(Data,";",1)
       Set personobject.Address=$Piece(Data,";",2)
       Set personobject.Zip=$Piece(Data,";",5)
-      Set personobject.Age=($h-$Piece(Data,";",6))\365.25
+      Set personobject.Age=($zdate($h,8)-$zdate(adbk.ABTHDAY,8))\10000
       Set personobject.Dob=$ZDATE($Piece(Data,";",6),3)
       Set personobject.Telh=$Piece(Phone,";",1)
       Set personobject.Telw=$Piece(Phone,";",2)
@@ -75,7 +75,7 @@ ClassMethod GetDataById(Id As %Integer) As %Status
  try {
       if $data(%request) {
         set %response.ContentType="application/json"
-	    set %response.CharSet = "utf-8"
+	      set %response.CharSet = "utf-8"
 	  }
 
       set personobject = {}
@@ -87,7 +87,7 @@ ClassMethod GetDataById(Id As %Integer) As %Status
       Set personobject.Name = adbk.ANAME
       Set personobject.Address = adbk.ASTREET
       Set personobject.Zip=adbk.AZIP
-      Set personobject.Age=($h-adbk.ABTHDAY)\365.25
+      Set personobject.Age=($zdate($h,8)-$zdate(adbk.ABTHDAY,8))\10000
       Set personobject.Dob=$ZDATE(adbk.ABTHDAY,3)
       Set personobject.Telh=adbk.APHHOME
       Set personobject.Telw=adbk.APHWORK
@@ -127,6 +127,8 @@ ClassMethod Create() As %Status
  try {
 		
    if $data(%request) {
+     set %response.ContentType="application/json"
+	   set %response.CharSet = "utf-8"
      set len = 1000
      set json = %request.Content.Read(.len,.status)
    }
@@ -173,6 +175,8 @@ ClassMethod Update() As %Status
  try {
 		
    if $data(%request) {
+     set %response.ContentType="application/json"
+	   set %response.CharSet = "utf-8"
      set len = 1000
      set json = %request.Content.Read(.len,.status)
    }
@@ -194,7 +198,7 @@ ClassMethod Update() As %Status
    If Telh'="",Telh'?.n1"-".n1"-".n Set Result.Error="電話番号は、999-9999-9999の形式で入力" write Result.%ToJSON() Quit
    Set LName=$Piece(Name,"　",1)
    Set FName=$Piece(Name,"　",2)
-   If FName="" Set Error.Result.Error="名前は、全角スペースで区切って下さい。" write Result.%ToJSON() Quit
+   If FName="" Set Result.Error="名前は、全角スペースで区切って下さい。" write Result.%ToJSON() Quit
    Lock +^ADBK("DATA",Id)
    Set ^ADBK("DATA",Id,"DEMO")=Name_";"_Address_";;;"_Zip_";"_DOB
    Set ^ADBK("DATA",Id,"PHONE")=Telh_";"_Telw_";"
