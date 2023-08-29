@@ -7,6 +7,7 @@ const serverAddress = configinfo.ServerAddress;
 const serverPort = configinfo.ServerPort;
 const username = configinfo.Username;
 const password = configinfo.Password;
+const ApplicationName = configinfo.ApplicationName;
 
 export const Adbk = (props: any) => {
 
@@ -48,7 +49,7 @@ export const Adbk = (props: any) => {
     }
     else {
 	  axios
-	    .get<any>(`http://${serverAddress}:${serverPort}/api/adbk/listbyname/${tname}?IRISUsername=${username}&IRISPassword=${password}`)
+	    .get<any>(`http://${serverAddress}:${serverPort}/${ApplicationName}/listbyname/${tname}?IRISUsername=${username}&IRISPassword=${password}`)
 	    .then((result: any) => {
 	  	  const names = result.data.map((idname: any) => ({
 		  id: idname.split(" ")[0],
@@ -98,7 +99,7 @@ export const Adbk = (props: any) => {
    const getADBKById = (id: any) => {
 	
     axios
-	  .get<any>(`http://${serverAddress}:${serverPort}/api/adbk/getdatabyid/${id}?IRISUsername=${username}&IRISPassword=${password}`)
+	  .get<any>(`http://${serverAddress}:${serverPort}/${ApplicationName}/getdatabyid/${id}?IRISUsername=${username}&IRISPassword=${password}`)
 	  .then((result: any) => {
         setName(result.data.Name);
         setInputText(result.data.Name);
@@ -152,7 +153,7 @@ export const Adbk = (props: any) => {
 	let id = aid;
 
 	axios
-	  .delete<any>(`http://${serverAddress}:${serverPort}/api/adbk/delete/${id}?IRISUsername=${username}&IRISPassword=${password}`)
+	  .delete<any>(`http://${serverAddress}:${serverPort}/${ApplicationName}/delete/${id}?IRISUsername=${username}&IRISPassword=${password}`)
       .catch((error: any) => {
 	     setIsError(true)
 		 if (error.response) {			
@@ -187,7 +188,7 @@ export const Adbk = (props: any) => {
 	  senddata.DOB = dob;
 
 	  axios
-	    .post<any>(`http://${serverAddress}:${serverPort}/api/adbk/create?IRISUsername=${username}&IRISPassword=${password}`,senddata)
+	    .post<any>(`http://${serverAddress}:${serverPort}/${ApplicationName}/create?IRISUsername=${username}&IRISPassword=${password}`,senddata)
 	   .then((result: any) => {
 		  if (result.data.Error === "ok") {
 		  	setIsError(false);
@@ -223,7 +224,7 @@ export const Adbk = (props: any) => {
 	  senddata.DOB = dob;
 	  
 	  axios
-	    .put<any>(`http://${serverAddress}:${serverPort}/api/adbk/modify?IRISUsername=${username}&IRISPassword=${password}`,senddata)
+	    .put<any>(`http://${serverAddress}:${serverPort}/${ApplicationName}/modify?IRISUsername=${username}&IRISPassword=${password}`,senddata)
 	   .then((result: any) => {
 	   	  // console.log("result = " + JSON.stringify(result, null, 2));
 		  if (result.data.Error === "ok") {
