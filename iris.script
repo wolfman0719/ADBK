@@ -11,5 +11,5 @@ set status = sec.%%Save()
 
 zn "USER"
 set io = ##class(%SYS.NLS.Device).SetIO("UTF8")
-Do $system.OBJ.ImportDir("/intersystems/iris/adbk/","ck",,1)
+Do $system.OBJ.ImportDir("/intersystems/iris/adbk/",,"ck",,1)
 halt
