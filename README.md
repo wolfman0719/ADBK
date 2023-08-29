@@ -158,7 +158,7 @@ CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
 
 新しいウェブ・アプリケーションを作成
 
-- 名前:  /adbk
+- 名前:  /api/adbk
 - ネームスペース: User（デフォルト）
 - 有効　REST
 - ディスパッチ・クラス: ADBK.Broker
