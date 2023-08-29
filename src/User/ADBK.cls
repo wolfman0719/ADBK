@@ -11,7 +11,7 @@ SELECT %ID,ANAME FROM ADBK
 
 Parameter KEYS = "AID";
 
-Property AAGE As %Integer [ Calculated, ReadOnly, SqlComputeCode = {set {AAGE}=$H-{ABTHDAY}\365.25  
+Property AAGE As %Integer [ Calculated, ReadOnly, SqlComputeCode = {set {AAGE}=($zdate($H,8)-$zdate({ABTHDAY},8))\10000  
 }, SqlComputed ];
 
 /// Birthday
@@ -60,7 +60,7 @@ ClassMethod GetInstanceById(id As %String) As %List [ SqlProc ]
 	set homephone = $piece(record2,";",1)
 	set workphone = $piece(record2,";",2)
 	set otherphone = $translate($piece(record2,";",3),$char(0),"")
-	set age = +$h - dob\365.25
+	set age = ($zdate(+$h,8) - $zdate(dob,8))\10000
 	quit $listbuild(1,name,street,city,zip,dobc,homephone,workphone,otherphone,age,id)
 }
 
