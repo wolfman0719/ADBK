@@ -130,18 +130,18 @@ IRISの実行環境に合わせてファイルの内容を変更
 
 サンプルを動かすネームスペース（デフォルトUser）に必要なルーチン、グローバル、クラスをロードする
 
-build/adbk
+src
 
 - ADBK.mac
 - adbkglb.xml
 - VISMUTIL.mac
 
-build/adbk/ADBK
+src/ADBK
 
 - Broker.cls
 - JSON.cls
 
-build/adbk/User
+src/User
 
 - ADBK.cls
 
