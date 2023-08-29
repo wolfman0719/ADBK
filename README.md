@@ -6,113 +6,118 @@ IRISで用意された様々な.Net APIを使用したサンプル
 
 ## ディレクトリ構造
 
-### ActiveX
+### 1. ActiveX
 
 VB6でCacheObject.dll を利用したサンプルをIRISの.Net Native APIで書き直したサンプル
 
-#### forIRIS
+#### 1.1 forIRIS
 
 .Net Native APIバージョン
 
-#### Project1.Net
+#### 1.2 Project1.Net
 
 VB6のプロジェクトをVisual Studio 2008で変換したプロジェクト
 
-#### VB6
+#### 1.3 VB6
 
 VB6でCacheObject.dllを利用したサンプル
 
-### ADO
+### 2. ADO
 
 VB6でADO.Netを使用したサンプルをIRISのADO.Netで書き直したサンプル
 
-#### forIRIS
+#### 2.1 forIRIS
 
 ADO.Net for IRISバージョン
 
-#### Project1.NET
+#### 2.2 Project1.NET
 
 VB6のプロジェクトをVisual Studio 2008で変換したプロジェクト
 
-#### VB6
+#### 2.3 VB6
 
 VB6でADO.Netを使用したサンプル
 
-### adodotnet
+### 3. adodotnet
 
 ADO.netを使用したVB.netサンプル
 
-#### for Cache
+#### 3.1 for Cache
 
 Cache用プロジェクト(ODBC)
 
-#### forIRISODBC
+#### 3.2 for IRISODBC
 
 IRIS用プロジェクト(ODBC)
 
-#### forIRISManagedProvider
+#### 3.3 for IRIS ManagedProvider
 
 IRIS用プロジェクト（IRIS ADO.Net）
 
-### CacheDirect
+### 4. CacheDirect
 
 VB6のCache Direct（VisM.OCX）を使用したサンプルを.Net Native APIを使用したCacheDirectEmulatorで書き換えたサンプル
 
-#### forIRIS
+#### 4.1 forIRIS
 
 IRIS用にCacheDirect Emulatorを使用して書き換えたバージョン
 
-#### Project1.NET
+#### 4.2 Project1.NET
 
 VB6のプロジェクトをVisual Studio 2008でVB.NETに変換したプロジェクト
 
-#### VB6
+#### 4.3 VB6
 
 VisM.OCXを使用したサンプル
 
-### CacheList
+### 5. CacheList
 
 CacheListを使用したサンプルをIRIS用に書き換えたサンプル
 
-#### forIRIS
+#### 5.1 forIRIS
 
 ADO.Netを使用してIRIS用に書き換えたサンプル
 
-#### Project.NET
+#### 5.2 Project.NET
 
 VB6のプロジェクトをVisual Studio 2008でVB.NETに変換したプロジェクト
 
-#### Vb6
+#### 5.3 Vb6
 
 CacheList.OCXを使用したサンプル
 
-### dotnet
+### 6. dotnet
 
 C#のサンプル
 
 MVCモデルを使用したサンプル
 
-#### forCache
+#### 6.1 forCache
 
 Cache用サンプル
 
-#### forIRIS
+#### 6.2 forIRIS
 
-##### MVC-adonet
+##### 6.2.1 MVC-adonet
 
 ADO.NETを使用したサンプル
 
-##### MVC-direct
+##### 6.2.2 MVC-direct
 
 .Net Native APIを使用したサンプル
 
-##### MVC-objbind
+##### 6.2.3 MVC-objbind
 
 .Net Native APIを使用したサンプル
 
-##### MVC-REST
+##### 6.2.4 MVC-REST
 
 REST/JSONを使用したサンプル
+
+### 7. react
+
+reactによるWebアプリケーションサンプル
+詳細は、react-setup.mdを参照
 
 ## 事前準備
 
@@ -151,9 +156,10 @@ CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
 
 [CacheDirect EmulatorのGithub](https://github.com/wolfman0719/CacheDirectEmulator.git)
 
-### react
+### Visula Studioプロジェクト作成方法
 
-reactによるWebアプリケーションサンプル
+CacheDirectの所のsetup.mdを参考にして設定
+（参照設定等がプリジェクト毎に異なる）
 
 ### REST設定
 
@@ -167,8 +173,3 @@ reactによるWebアプリケーションサンプル
 - ディスパッチ・クラス: ADBK.Broker
 
 保存ボタンを押す
-
-### Visula Studioプロジェクト作成方法
-
-CacheDirectの所のsetup.mdを参考にして設定
-（参照設定等がプリジェクト毎に異なる）
