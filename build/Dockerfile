@@ -10,7 +10,7 @@ COPY adbk/* $ISC_TEMP_DIR/
 RUN  iris start $ISC_PACKAGE_INSTANCENAME \ 
 && printf 'Do ##class(Config.NLS.Locales).Install("jpuw") \
  set sec = ##class("Security.Applications").%%New() \
- set sec.Name = "/adbk" \
+ set sec.Name = "/api/adbk" \
  set sec.NameSpace = "USER" \
  set sec.DispatchClass ="ADBK.Broker" \
  set sec.AutheEnabled = 32 \
