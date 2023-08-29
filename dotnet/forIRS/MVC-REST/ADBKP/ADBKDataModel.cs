@@ -17,7 +17,7 @@ namespace ADBKP
     {
         public ADBKDatasource adbksrc;
         public List<string> idlist = new List<string>();
-        public bool newflag = true; //新規保存フラグ
+        public bool newflag = true; //譁ｰ隕丈ｿ晏ｭ倥ヵ繝ｩ繧ｰ
 
         public string Name = "";
         public string ZipCode = "";
@@ -44,7 +44,7 @@ namespace ADBKP
             try
             {
 
-                string url = string.Format("http://localhost:52773/ADBK/getdatabyid/{0}", aid);
+                string url = string.Format("http://localhost:52773/api/adbk/getdatabyid/{0}", aid);
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "GET";
                 HttpWebResponse res = (HttpWebResponse)req.GetResponse();
@@ -64,7 +64,7 @@ namespace ADBKP
             }
             catch (Exception err)
             {
-                MessageBox.Show("インスタンスオープンエラー " + err.Message);
+                MessageBox.Show("繧､繝ｳ繧ｹ繧ｿ繝ｳ繧ｹ繧ｪ繝ｼ繝励Φ繧ｨ繝ｩ繝ｼ " + err.Message);
             }
         }
 
@@ -74,7 +74,7 @@ namespace ADBKP
             idlist.Clear();
             List<string> anamelist = new List<string>();
 
-            string url = string.Format("http://localhost:52773/ADBK/listbyname/{0}", name);
+            string url = string.Format("http://localhost:52773/api/adbk/listbyname/{0}", name);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
@@ -156,12 +156,12 @@ namespace ADBKP
 
                 if (newflag == true) {
 
-                     req = (HttpWebRequest)WebRequest.Create("http://localhost:52773/ADBK/create");
+                     req = (HttpWebRequest)WebRequest.Create("http://localhost:52773/api/adbk/create");
                      req.Method = "POST";
                 }
                 else
                 {
-                    req = (HttpWebRequest)WebRequest.Create("http://localhost:52773/ADBK/modify");
+                    req = (HttpWebRequest)WebRequest.Create("http://localhost:52773/api/adbk/modify");
                     req.Method = "PUT";
                 }
 
@@ -179,7 +179,7 @@ namespace ADBKP
 
                 if (adbksrc.Error != "ok")
                 {
-                    MessageBox.Show("更新エラー " + adbksrc.Error);
+                    MessageBox.Show("譖ｴ譁ｰ繧ｨ繝ｩ繝ｼ " + adbksrc.Error);
                     return;
                 }
 
@@ -191,7 +191,7 @@ namespace ADBKP
             }
             catch (Exception err)
             {
-                MessageBox.Show("保存エラー " + err.Message);
+                MessageBox.Show("菫晏ｭ倥お繝ｩ繝ｼ " + err.Message);
             }
             
         }
@@ -199,7 +199,7 @@ namespace ADBKP
     
     public Boolean delete(string id)
     {
-            string url = string.Format("http://localhost:52773/ADBK/delete/{0}", id);
+            string url = string.Format("http://localhost:52773/api/adbk/delete/{0}", id);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "DELETE";
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
