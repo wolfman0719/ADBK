@@ -42,8 +42,8 @@
 
  IRISサーバーのIPアドレス、ポート番号を反映
  (デフォルト　IPアドレス = localhost IPポート番号: 8080)
-
- docker環境では、ポート番号を52775に変更する
+ Webアプリケーション名
+ （デフォルト　/iris/api/adbk）
 
 ## reactアプリケーションの起動
 
@@ -82,4 +82,6 @@ macOSの場合
     Header set Access-Control-Allow-Credentials "true"
 </IfModule>
 ```
+
+IISの場合は、デフォルト設定でOK
 
