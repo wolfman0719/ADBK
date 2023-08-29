@@ -6,7 +6,6 @@ services:
       context: .
       args:
         COMMIT_ID: adbkdemo
-    image: wolfman0719/adbk:demo
     container_name: adbkdemo
     init: true
     hostname: myiris
