@@ -44,7 +44,7 @@ namespace ADBKP
             try
             {
 
-                string url = string.Format("http://localhost:52773/api/adbk/getdatabyid/{0}", aid);
+                string url = string.Format("http://localhost/iris/api/adbk/getdatabyid/{0}", aid);
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "GET";
                 HttpWebResponse res = (HttpWebResponse)req.GetResponse();
@@ -74,7 +74,7 @@ namespace ADBKP
             idlist.Clear();
             List<string> anamelist = new List<string>();
 
-            string url = string.Format("http://localhost:52773/api/adbk/listbyname/{0}", name);
+            string url = string.Format("http://localhost/iris/api/adbk/listbyname/{0}", name);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
@@ -156,12 +156,12 @@ namespace ADBKP
 
                 if (newflag == true) {
 
-                     req = (HttpWebRequest)WebRequest.Create("http://localhost:52773/api/adbk/create");
+                     req = (HttpWebRequest)WebRequest.Create("http://localhost/iris/api/adbk/create");
                      req.Method = "POST";
                 }
                 else
                 {
-                    req = (HttpWebRequest)WebRequest.Create("http://localhost:52773/api/adbk/modify");
+                    req = (HttpWebRequest)WebRequest.Create("http://localhost/iris/api/adbk/modify");
                     req.Method = "PUT";
                 }
 
@@ -199,7 +199,7 @@ namespace ADBKP
     
     public Boolean delete(string id)
     {
-            string url = string.Format("http://localhost:52773/api/adbk/delete/{0}", id);
+            string url = string.Format("http://localhost/iris/api/adbk/delete/{0}", id);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "DELETE";
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
