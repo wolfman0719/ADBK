@@ -40,10 +40,26 @@
    
 ## serverconfig.jsonの調整
 
- IRISサーバーのIPアドレス、ポート番号を反映
- (デフォルト　IPアドレス = localhost IPポート番号: 8080)
- Webアプリケーション名
- （デフォルト　/iris/api/adbk）
+### MacOS（BrewでインストールしたApache）の場合
+
+ - IRISサーバーのIPアドレス、ポート番号を反映
+ - (IPアドレス = localhost IPポート番号: 8080)
+ - Webアプリケーション名
+ - （デフォルト　/api/adbk）
+
+### Windows（IIS）の場合
+
+ - IRISサーバーのIPアドレス、ポート番号を反映
+ - (IPアドレス = localhost IPポート番号: 80)
+ - Webアプリケーション名
+ - （デフォルト　/iris/api/adbk）
+
+### Private Web Serverの場合
+
+ - IRISサーバーのIPアドレス、ポート番号を反映
+ - (IPアドレス = localhost IPポート番号: 52773)
+ - Webアプリケーション名
+ - （デフォルト　//api/adbk）
 
 ## reactアプリケーションの起動
 
