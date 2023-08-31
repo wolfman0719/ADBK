@@ -145,6 +145,7 @@ src/ADBK
 
 - Broker.cls
 - JSON.cls
+- Setup.cls
 
 src/User
 
