@@ -92,7 +92,7 @@ C#のサンプル
 
 MVCモデルを使用したサンプル
 
-#### 6.1 forCache
+#### 6.1 Project1.NET
 
 Cache用サンプル
 
