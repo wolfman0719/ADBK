@@ -150,6 +150,12 @@ src/User
 
 - ADBK.cls
 
+```
+set dir = "c:\git\adbk\" 
+do $system.OBJ.Load(dir_"src\ADBK\Setup.cls","ck")
+do ##class(ADBK.Setup).SetupLocal(dir)
+```
+
 ### CacheDirect Emulator
 
 CacheDirect Emulatorを使用するサンプルの事前設定は、以下参照
