@@ -55,4 +55,4 @@ Windows Form（WinForms）ユーザーインタフェースを含むアプリケ
 
 デフォルトでは、Webサーバーとの接続は、2023.2以降のWindows環境でIISをWebサーバーとして設定した場合のWebアプリケーション設定が前提となっている。
 
-2023.1以前のPrivate Webサーバー環境で実行する際には、ADBKDataModel.cs-52773でADBKDataModel.csで置き換えてビルドする。
+2023.1以前のPrivate Webサーバー環境で実行する際には、ADBKDataModel.cs-52773でADBKDataModel.csを置き換えてビルドする。
