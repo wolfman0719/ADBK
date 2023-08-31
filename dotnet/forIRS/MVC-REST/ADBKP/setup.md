@@ -1,28 +1,30 @@
 # ADBK MVCREST
 
+## ビルド環境
+
+Visual Studio 2022
+
 ## ADBKMVCRESTプロジェクト
 
-Visual Studioを起動し、ファイル>新規作成>プロジェクトをクリック
+Visual Studio 2022を起動し、ファイル>新規作成>プロジェクトをクリック
 
 ### テンプレートを選択
 
-Windows フォームアプリケーション(.NET Framework)
+Windows フォームアプリケーション(.NET Framework　C##)
 
 Windows Form（WinForms）ユーザーインタフェースを含むアプリケーションを作成するためのプロジェクトです。
 
-C##
-
-プロジェクト名およびソリューション名
+プロジェクト名およびソリューション名(任意の名前でOK)
 
 - ADBKMVCREST
 
-フレームワーク
-
-- .NET Framework 4.8
 
 ### ファイル追加、参照設定
 
-#### Form1.csを削除
+#### Form1.csとProgram.csを削除
+
+この作業を必ず最初に実行
+（あとの作業がうまくいかない）
 
 #### 既存の項目を追加
 
@@ -33,7 +35,6 @@ C##
 - Form1.cs
 - Form1.resX
 - Program.cs
-- adbk.cs
 
 #### プロジェクト>参照の追加
 
@@ -46,6 +47,12 @@ C##
 
 アプリケーションパネル
 
-スタートアップフォーム　
+スタートアップオブジェクト(Visual Studio 2022)
 
-- Form1.cs
+- ADBKP.Program
+
+### 環境依存
+
+デフォルトでは、Webサーバーとの接続は、2023.2以降のWindows環境でIISをWebサーバーとして設定した場合のWebアプリケーション設定が前提となっている。
+
+2023.1以前のPrivate Webサーバー環境で実行する際には、ADBKDataModel.cs-52773でADBKDataModel.csで置き換えてビルドする。
