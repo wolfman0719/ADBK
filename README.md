@@ -4,6 +4,8 @@ ADBK(アドレス帳).Netデモアプリケーション for IRIS
 
 IRISで用意された様々な.Net APIを使用したサンプル
 
+Reactサンプルもあり
+
 ## ディレクトリ構造
 
 ### 1. ActiveX
@@ -117,6 +119,7 @@ REST/JSONを使用したサンプル
 ### 7. react
 
 reactによるWebアプリケーションサンプル
+
 詳細は、react-setup.mdを参照
 
 ## 事前準備
