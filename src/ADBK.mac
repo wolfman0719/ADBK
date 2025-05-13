@@ -75,12 +75,12 @@ ReBuildXNAMEIndex() PUBLIC {
  Kill ^ADBK("XNAME")
  set node = ""
  for {
-	 set node = $order(^ADBK("DATA",node))
-	 if node = "" quit
-	 set name = $piece(^ADBK("DATA",node,"DEMO"),";",1)
-	 set lastname = $piece(name,"　",1)
-	 set firstname = $piece(name,"　",2)
-	 set ^ADBK("XNAME",lastname,firstname,node) = ""
+   set node = $order(^ADBK("DATA",node))
+   if node = "" quit
+   set name = $piece(^ADBK("DATA",node,"DEMO"),";",1)
+   set lastname = $piece(name,"　",1)
+   set firstname = $piece(name,"　",2)
+   set ^ADBK("XNAME",lastname,firstname,node) = ""
  }
 	 
 }
