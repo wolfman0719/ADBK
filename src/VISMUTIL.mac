@@ -14,8 +14,8 @@ GetList(Gname,Node,Matchkey,Delim) [PLIST, i, Node2, Matched] PUBLIC {
  Kill PLIST
 
  If (Node = $char(0)) {
-	 set Node = ""
-	 set Matchkey = ""
+   set Node = ""
+   set Matchkey = ""
  }
  If Node'="" Set Node=$Order(@Gname@(Node),-1)
  set j = 0
@@ -27,9 +27,9 @@ GetList(Gname,Node,Matchkey,Delim) [PLIST, i, Node2, Matched] PUBLIC {
    If ((Matchkey'= "") && (Node'[Matchkey)) Set Matched=1,Node="" Quit
    Set Node2=""
    For {
-	 Set Node2=$Order(@Gname@(Node,Node2))
-	 If Node2="" Quit
-	 set j = j + 1  
+     Set Node2=$Order(@Gname@(Node,Node2))
+     If Node2="" Quit
+     set j = j + 1  
      Set PLIST(j)=Node_Delim_Node2
    }  
  }
